@@ -259,7 +259,7 @@ operatorid2=15572d1c-ec13-0d78-7f92-dd4278871373
 ```
 
 ```
-result=`curl --location --request POST 'http://localhost:8081/auth/login' \
+result=`curl -s --location --request POST 'http://localhost:8081/auth/login' \
 --header 'Content-Type: application/json' \
 --header "apiKey: $apikey1" \
 --data-raw '{
@@ -277,7 +277,7 @@ echo $token1
 ```
 
 ```
-curl --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator' \
+curl -s --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1" | jq
 ```
@@ -285,7 +285,7 @@ curl --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=
 ### 部品登録およびA社からB社へのCFP結果提出の依頼をする(基本フロー2 #4)
 
 ```
-result=`curl --location --request PUT 'http://localhost:8081/api/v1/authInfo?dataTarget=plant' \
+result=`curl -s --location --request PUT 'http://localhost:8081/api/v1/authInfo?dataTarget=plant' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token1" \
@@ -300,7 +300,7 @@ result=`curl --location --request PUT 'http://localhost:8081/api/v1/authInfo?dat
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=parts' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=parts' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token1" \
@@ -317,7 +317,7 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=partsStructure' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=partsStructure' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token1" \
@@ -347,7 +347,7 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 }'` & echo $result | jq
 
 ```
-curl --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=1234567890124' \
+curl -s --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=1234567890124' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1"
 ```
@@ -361,7 +361,7 @@ curl --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=
 
 ### B社からA社へ部品登録紐付けをする(基本フロー2 #31)
 ```
-result=`curl --location --request POST 'http://localhost:8081/auth/login' \
+result=`curl -s --location --request POST 'http://localhost:8081/auth/login' \
 --header 'Content-Type: application/json' \
 --header "apiKey: $apikey1" \
 --data-raw '{
@@ -371,7 +371,7 @@ result=`curl --location --request POST 'http://localhost:8081/auth/login' \
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8081/api/v1/authInfo?dataTarget=plant' \
+result=`curl -s --location --request PUT 'http://localhost:8081/api/v1/authInfo?dataTarget=plant' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
@@ -386,7 +386,7 @@ result=`curl --location --request PUT 'http://localhost:8081/api/v1/authInfo?dat
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=parts' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=parts' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
@@ -403,13 +403,13 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 ```
 
 ```
-result=`curl --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse' \
+result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=f475cb75-b3b8-4427-9e8d-376377f1c795&traceId=2fb97052-250b-44de-acbb-1ba63e28af71' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=f475cb75-b3b8-4427-9e8d-376377f1c795&traceId=2fb97052-250b-44de-acbb-1ba63e28af71' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"` & echo $result | jq
 ```
@@ -417,7 +417,7 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 
 ### B社からA社へCFP情報の伝達をする(基本フロー3 #5)
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
@@ -492,19 +492,19 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 
 ### B社の回答情報の取得およびA社の完成品のCFPを算出(基本フロー3 #6, #2)
 ```
-result=`curl --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest' \
+result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"` & echo $result | jq
 ```
 
 ```
-result=`curl --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
+result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"` & echo $result | jq
 ```
 
 ```
-result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp' \
+result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp' \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
@@ -565,7 +565,7 @@ result=`curl --location --request PUT 'http://localhost:8080/api/v1/datatranspor
 ```
 
 ```
-result=`curl --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
+result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"` & echo $result | jq
 ```
