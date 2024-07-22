@@ -257,13 +257,13 @@ apikey2=Sample-APIKey2
 ```
 
 ```
-result=`curl -s --location --request POST "http://localhost:8081/auth/login" \
+result=eval curl -s --location --request POST "http://localhost:8081/auth/login" \
 --header "Content-Type: application/json" \
 --header "apiKey: $apikey1" \
---data-raw "{
-  'operatorAccountId': 'oem_a@example.com',
-  'accountPassword': 'oemA&user_01'
-}'` && echo $result | jq
+--data-raw '{
+  "operatorAccountId": "oem_a@example.com",
+  "accountPassword": "oemA&user_01"
+}' && echo $result | jq
 ```
 
 ```
