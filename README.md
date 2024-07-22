@@ -265,7 +265,7 @@ result=`curl -s --location --request POST 'http://localhost:8081/auth/login' \
 --data-raw '{
   "operatorAccountId": "oem_a@example.com",
   "accountPassword": "oemA&user_01"
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -296,7 +296,7 @@ result=`curl -s --location --request PUT 'http://localhost:8081/api/v1/authInfo?
   "plantId": null,
   "plantName": "A工場",
   "plantAttribute": {}
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -313,7 +313,7 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
   "supportPartsName": "modelA",
   "terminatedFlag": false,
   "traceId": null
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -344,7 +344,7 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
       "traceId": null
     }
   ]
-}'` & echo $result | jq
+}'` && echo $result | jq
 
 ```
 curl -s --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=1234567890124' \
@@ -367,7 +367,7 @@ result=`curl -s --location --request POST 'http://localhost:8081/auth/login' \
 --data-raw '{
   "operatorAccountId": "supplier_b@example.com",
   "accountPassword": "supplierB&user_01"
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -382,7 +382,7 @@ result=`curl -s --location --request PUT 'http://localhost:8081/api/v1/authInfo?
   "plantId": null,
   "plantName": "B工場",
   "plantAttribute": {}
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -399,7 +399,7 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
   "supportPartsName": "modelB",
   "terminatedFlag": true,
   "traceId": null
-}'` & echo $result | jq
+}'` && echo $result | jq
 ```
 
 ```
@@ -411,7 +411,7 @@ result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatrans
 ```
 result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=f475cb75-b3b8-4427-9e8d-376377f1c795&traceId=2fb97052-250b-44de-acbb-1ba63e28af71' \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"` & echo $result | jq
+--header "Authorization: Bearer $token"` && echo $result | jq
 ```
 
 
@@ -474,7 +474,7 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
       "TiR": 4
     }
   }
-]'` & echo $result | jq
+]'` && echo $result | jq
 ```
 
 ```
@@ -494,13 +494,13 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
 ```
 result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest' \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"` & echo $result | jq
+--header "Authorization: Bearer $token"` && echo $result | jq
 ```
 
 ```
 result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"` & echo $result | jq
+--header "Authorization: Bearer $token"` && echo $result | jq
 ```
 
 ```
@@ -567,7 +567,7 @@ result=`curl -s --location --request PUT 'http://localhost:8080/api/v1/datatrans
 ```
 result=`curl -s --location --request GET 'http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=40b77952-2c89-49be-8ce9-7c64a15e0ae7' \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"` & echo $result | jq
+--header "Authorization: Bearer $token"` && echo $result | jq
 ```
 
 ```
