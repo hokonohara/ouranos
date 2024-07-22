@@ -269,17 +269,17 @@ result=`curl -s --location --request POST 'http://localhost:8081/auth/login' \
 ```
 
 ```
-token1=`echo $result | jq -r .accessToken`
+token1=`echo $result | jq -r .accessToken` && echo $token1
 ```
 
 ```
-echo $token1
-```
-
-```
-curl -s --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator' \
+result=`curl -s --location --request GET 'http://localhost:8081/api/v1/authInfo?dataTarget=operator' \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token1" | jq
+--header "Authorization: Bearer $token1"` ` && echo $result | jq
+```
+
+```
+operatorid1=`echo $result | jq -r .operatorid` && echo $operatorid1
 ```
 
 ### 部品登録およびA社からB社へのCFP結果提出の依頼をする(基本フロー2 #4)
