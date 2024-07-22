@@ -253,9 +253,9 @@ docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env
 
 ```
 apikey1=Sample-APIKey1
-apikey2=
-operatorid1=
-operatorid2=
+apikey2=Sample-APIKey2
+operatorid1=b39e6248-c888-56ca-d9d0-89de1b1adc8e
+operatorid2=15572d1c-ec13-0d78-7f92-dd4278871373
 ```
 
 ```
