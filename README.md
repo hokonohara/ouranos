@@ -180,7 +180,40 @@ cd ../user-authentication-system
 docker compose pull
 ```
 
-### ビルドとdocker実行
+### ビルド
+
+```
+cd ../data-transaction-system
+```
+```
+go build main.go
+```
+
+fix compability issues with newer docker.
+```
+sed -i 's/as/AS/' Dockerfile
+```
+
+```
+docker build -t data-spaces-backend .
+```
+
+```
+cd ../user-authentication-system
+```
+```
+go build main.go
+```
+
+```
+sed -i 's/as/AS/' Dockerfile
+```
+
+```
+docker build -t authenticator-backend .
+```
+
+### docker実行
 
 ```
 docker compose up -d
@@ -189,6 +222,7 @@ docker compose up -d
 ```
 export POSTGRESQL_URL='postgres://dhuser:passw0rd@localhost:5432/dhlocal?sslmode=disable'
 ```
+
 ```
 migrate -path setup/migrations -database ${POSTGRESQL_URL} up
 ```
@@ -201,40 +235,13 @@ make idp-add-local
 ```
 
 ```
-cd ../data-transaction-system
-```
-```
-go build main.go
-```
-fix compability issues with newer docker.
-```
-nano Dockerfile
-# change 'as' to 'AS' in line 1
-```
-
-```
-docker build -t data-spaces-backend .
-```
-```
 docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env-file config/local.env -p 8080:8080 --name data-spaces-backend data-spaces-backend
 ```
 
 ```
-cd ../user-authentication-system
-```
-```
-go build main.go
-```
-```
-nano Dockerfile
-# change 'as' to 'AS' in line 1
-```
-```
-docker build -t authenticator-backend .
-```
-```
 docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env-file config/local.env -p 8081:8081 --name authenticator-backend authenticator-backend
 ```
+
 
 メモ
 
