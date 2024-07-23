@@ -540,8 +540,7 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
-btraceid=`echo $result | jq -r .childrenPartsModel[0].traceId`
-echo "btraceid=$btraceid"
+
 ```
 
 4. 部品登録紐付けの依頼確認
@@ -554,7 +553,7 @@ result=`curl -s --location --request GET "$url" \
 --header "apiKey: $bapikey" \
 --header "Authorization: Bearer $btoken"`
 echo $result | jq
-btradeid=`echo $result | jq -r .[0].tradeId`
+btradeid=`echo $result | jq -r .[0].statusModel.tradeId`
 echo "btradeid=$btradeid"
 ```
 
@@ -596,13 +595,13 @@ data="[
     \"cfpId\": null,
     \"traceId\": \"$btraceid\",
     \"ghgEmission\": 10.0,
-    \"ghgDeclaredUnit\": "kgCO2e/kilogram\",
+    \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
     \"cfpType\": \"mainProduction\",
     \"dqrType\": \"mainProcessing\",
     \"dqrValue\": {
-      \"TeR": 2,
-      \"GeR": 3,
-      \"TiR": 4
+      \"TeR\": 2,
+      \"GeR\": 3,
+      \"TiR\": 4
     }
   },
   {
@@ -619,7 +618,7 @@ data="[
     }
   },
   {
-    \"cfpId": null,
+    \"cfpId\": null,
     \"traceId\": \"$btraceid\",
     \"ghgEmission\": 0,
     \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
