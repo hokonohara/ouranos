@@ -502,7 +502,7 @@ bopenplantid=1234567890124012345
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
 data="{
   \"openPlantId\": \"$bopenplantid\",
-  \"operatorId\": \"boperatorid\",
+  \"operatorId\": \"$boperatorid\",
   \"plantAddress\": \"xx県xx市xxxx町2-1-1234\",
   \"plantId\": null,
   \"plantName\": \"B工場\",
