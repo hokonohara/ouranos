@@ -440,8 +440,8 @@ data="{
     \"tradeId\": null
   },
   \"tradeModel\": {
-    \"downstreamOperatorId\": \"$aoperatorid",
-    \"downstreamTraceId\": \"$atraceid2",
+    \"downstreamOperatorId\": \"$aoperatorid\",
+    \"downstreamTraceId\": \"$atraceid2\",
     \"tradeId\": null,
     \"upstreamOperatorId\": \"$boperatorid\",
     \"upstreamTraceId\": null
