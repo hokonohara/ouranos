@@ -375,7 +375,7 @@ data="{
     \"plantId\": \"$aplantid\",
     \"supportPartsName\": \"modelA\",
     \"terminatedFlag\": false,
-    \"traceId\": \"atraceid1\"
+    \"traceId\": \"$atraceid1\"
   },
   \"childrenPartsModel\": [
     {
