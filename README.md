@@ -452,6 +452,7 @@ result=`curl -s --location --request PUT "$url" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $atoken" \
 --data "$data"`
+echo $result | jq
 atradeid=`echo $result | jq -r .tradeModel.tradeId`
 echo "atradeid=$atradeid"
 astatusid=`echo $result | jq -r .statusModel.statusId`
