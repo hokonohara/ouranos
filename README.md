@@ -253,82 +253,108 @@ docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env
 
 ### 事業者認証
 
+1. 事業者認証の実行
+   
+   実行者：A社
+
 ```
-apikey1=Sample-APIKey1
+aapikey=Sample-APIKey
+aaccountid="oem_a@example.com"
+aaccountpass="oemA&user_01"
 ```
 
 ```
 # CompanyA get access token
 url="http://localhost:8081/auth/login"
 data="{
-  \"operatorAccountId\": \"oem_a@example.com\",
-  \"accountPassword\": \"oemA&user_01\"
+  \"operatorAccountId\": \"$aaccountid\",
+  \"accountPassword\": \"$aaccountpass\"
 }"
 result=`curl -s --location --request POST "$url" \
 --header "Content-Type: application/json" \
---header "apiKey: $apikey1" \
+--header "apiKey: $aapikey" \
 --data-raw "$data"`
 echo $result | jq
-token1=`echo $result | jq -r .accessToken`
-echo "token1=$token1"
+atoken=`echo $result | jq -r .accessToken`
+echo "atoken=$atoken"
 ```
+
+2. 事業者情報の取得
+   
+    実行者：A社
 
 ```
 # CompanyA check access token, get operatorId
 url="http://localhost:8081/api/v1/authInfo?dataTarget=operator"
 result=`curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token1"`
+--header "apiKey: $aapikey" \
+--header "Authorization: Bearer $atoken"`
 echo $result | jq
-operatorid1=`echo $result | jq -r .operatorId`
-echo "operatorid1=$operatorid1"
+aoperatorid=`echo $result | jq -r .operatorId`
+echo "aoperatorid=$aoperatorid"
 ```
 
 ### 部品登録およびA社からB社へのCFP結果提出の依頼をする(基本フロー2 #4)
 
+1. 事業所の登録
+
+```
+aopenplantid=1234567890123012345
+```
+
+    実行者：A社
+  
 ```
 # CompanyA create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
 data="{
-  \"openPlantId\": \"1234567890123012345\",
-  \"operatorId\": \"$operatorid1\",
+  \"openPlantId\": \"$aopenplantid\",
+  \"operatorId\": \"$aoperatorid\",
   \"plantAddress\": \"xx県xx市xxxx町1-1-1234\",
   \"plantId\": null,
   \"plantName\": \"A工場\",
   \"plantAttribute\": {}
 }"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $aapikey" \
 --header "Content-Type: application/json" \
---header "Authorization: Bearer $token1" \
+--header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
-plantid1=`echo $result | jq -r .plantId`
-echo "plantid1=$plantid1"
+aplantid=`echo $result | jq -r .plantId`
+echo "aplantid=$aplantid"
 ```
 
+2. 親部品情報の作成
+
+    実行者：A社
+   
 ```
 # CompanyA create part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
   \"amountRequired\": null,
   \"amountRequiredUnit\": \"kilogram\",
-  \"operatorId\": \"$operatorid1\",
+  \"operatorId\": \"$aoperatorid\",
   \"partsName\": \"部品A\",
-  \"plantId\": \"$plantid1\",
+  \"plantId\": \"$aplantid\",
   \"supportPartsName\": \"modelA\",
   \"terminatedFlag\": false,
   \"traceId\": null
 }"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $aapikey" \
 --header "Content-Type: application/json" \
---header "Authorization: Bearer $token1" \
+--header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
-traceid1=`echo $result | jq -r .traceId`
-echo "traceid1=$traceid1"
+atraceid1=`echo $result | jq -r .traceId`
+echo "atraceid1=$atraceid1"
 ```
+
+3. 部品構成情報の登録
+   
+   実行者：A社
 
 ```
 # CompanyA create part structure
@@ -337,20 +363,20 @@ data="{
   \"parentPartsModel\": {
     \"amountRequireddv": null,
     \"amountRequiredUnit\": \"kilogram\",
-    \"operatorId\": \"$operatorid1\",
+    \"operatorId\": \"$aoperatorid\",
     \"partsName\": \"部品A\",
-    \"plantId\": \"$plantid1\",
+    \"plantId\": \"$aplantid\",
     \"supportPartsName\": \"modelA\",
     \"terminatedFlag\": false,
-    \"traceId\": \"traceid1\"
+    \"traceId\": \"atraceid1\"
   },
   \"childrenPartsModel\": [
     {
       \"amountRequired\": 5,
       \"amountRequiredUnit\": \"kilogram\",
-      \"operatorId\": \"$operatorid1\",
+      \"operatorId\": \"$aoperatorid\",
       \"partsName\": \"部品A1\",
-      \"plantId\": \"$plantid1\",
+      \"plantId\": \"$aplantid\",
       \"supportPartsNamedv": \"modelA-1\",
       \"terminatedFlag\": false,
       \"traceId\": null
@@ -358,114 +384,195 @@ data="{
   ]
 }"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $aapikey" \
 --header "Content-Type: application/json" \
---header "Authorization: Bearer $token1" \
+--header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
-traceid2=`echo $result | jq -r .childrenPartsModel[0].traceId`
-echo "traceid2=$traceid2"
+atraceid2=`echo $result | jq -r .childrenPartsModel[0].traceId`
+echo "atraceid2=$atraceid2"
 ```
 
+### CFP結果提出の依頼
+
+ 公開されたB社情報(他社検索用)
+
+```
+operatorb=1234567890124
+```
+
+1. B社の事業者識別子（内部）の検索
+
+    実行者：A社
+   
 ```
 # CompanyA find company B operatorId
-operatorb=1234567890124
 url="http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=$operatorb"
 curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token1"
-operatorid2=`echo $result | jq -r .operatorId`
-echo "operatorid2=$operatorid2"
+--header "apiKey: $aapikey" \
+--header "Authorization: Bearer $atoken"
+boperatorid=`echo $result | jq -r .operatorId`
+echo "boperatorid=$boperatorid"
+```
+
+2. A社からB社への取引関係の作成
+
+    実行者：A社
+
+```
+# CompanyA request trading with CompanyB
+url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
+data="{
+  "statusModel": {
+    \"message\": \"来月中にご回答をお願いします。\",
+    \"replyMessage\": null,
+    \"requestStatus\": {},
+    \"requestType\": \"CFP\",
+    \"statusId\": null,
+    \"tradeId\": null
+  },
+  "tradeModel": {
+    \"downstreamOperatorId\": \"$aoperatorid",
+    \"downstreamTraceId\": \"$atraceid2",
+    \"tradeId\": null,
+    \"upstreamOperatorId\": \"$boperatorid\",
+    \"upstreamTraceId\": null
+  }
+}"
+result=`curl --location --request PUT "$url" \
+--header "apiKey: $aapikey" \
+--header "Content-Type: application/json" \
+--header "Authorization: Bearer $atoken" \
+--data "$data"`
+atradeid=`echo $result | jq -r .tradeModel.tradeId`
+echo "atradeid=$atradeid"
+astatusid=`echo $result | jq -r .statusModel.statusId`
+echo "astatusid=$astatusid"
 ```
 
 
 ### B社からA社へ部品登録紐付けをする(基本フロー2 #31)
 
+1. 事業者認証の実行
+
+    実行者：B社
+
 ```
-apikey2=Sample-APIKey2
+bapikey=Sample-APIKey2
+baccountid="supplier_b@example.com"
+baccountpass="supplierB&user_01"
 ```
 
 ```
 # CompanyB get access token
 url="http://localhost:8081/auth/login"
 data="{
-  \"operatorAccountId\": \"supplier_b@example.com\",
-  \"accountPassword\": \"supplierB&user_01\"
+  \"operatorAccountId\": \"$baccountid\",
+  \"accountPassword\": \"$baccountpass\"
 }"
 result=`curl -s --location --request POST "$url" \
 --header 'Content-Type: application/json' \
---header "apiKey: $apikey1" \
+--header "apiKey: $bapikey" \
 --data-raw "$data"`
 echo $result | jq
-token2=`echo $result | jq -r .accessToken`
-echo "token2=$token2"
+btoken=`echo $result | jq -r .accessToken`
+echo "btoken=$btoken"
 ```
 
-CompanyB can use api to get his operatorid, but we already have it as operatorid2
+CompanyB can use api to get his operatorid, but we already have it as boperatorid
+
+2. 事業所の登録
+```
+bopenplantid=1234567890124012345
+```
+
+    実行者：B社
 
 ```
 # CompanyB create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
 data="{
-  \"openPlantId\": \"1234567890124012345\",
-  \"operatorId\": \"operatorid2\",
+  \"openPlantId\": \"$bopenplantid\",
+  \"operatorId\": \"boperatorid\",
   \"plantAddress\": \"xx県xx市xxxx町2-1-1234\",
   \"plantId\": null,
   \"plantName\": \"B工場\",
   \"plantAttribute\": {}
 }"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $bapikey" \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer $token" \
+--header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
+bplantid=`echo $result | jq -r .plantId`
+echo "bplantid=$bplantid"
 ```
+
+3. 親部品情報の作成
+   
+    実行者：B社
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
   \"amountRequired\": null,
   \"amountRequiredUnit\": \"kilogram\",
-  \"operatorId\": \"15572d1c-ec13-0d78-7f92-dd4278871373\",
+  \"operatorId\": \"$boperatorid\",
   \"partsName\": \"部品B\",
-  \"plantId\": \"544a5a35-dab3-469f-8ff5-116a4fe483e8\",
+  \"plantId\": \"$bplantid\",
   \"supportPartsName\": \"modelB\",
   \"terminatedFlag\": true,
   \"traceId\": null
 }"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $bapikey" \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer $token" \
+--header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
+btraceid=`echo $result | jq -r .childrenPartsModel[0].traceId`
+echo "btraceid=$btraceid"
 ```
+
+4. 部品登録紐付けの依頼確認
+   
+    実行者：B社
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse"
 result=`curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"`
+--header "apiKey: $bapikey" \
+--header "Authorization: Bearer $btoken"`
+echo $result | jq
+btradeid=`echo $result | jq -r .[0].tradeId`
+echo "btradeid=$btradeid"
 ```
 
+5. 部品登録紐付けの登録
+  
+   実行者：B社
+
 ```
-url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=f475cb75-b3b8-4427-9e8d-376377f1c795&traceId=2fb97052-250b-44de-acbb-1ba63e28af71"
+url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=$btradeid&traceId=$btraceid"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"`
+--header "apiKey: $bapikey" \
+--header "Authorization: Bearer $btoken"`
 echo $result | jq
 ```
 
-
 ### B社からA社へCFP情報の伝達をする(基本フロー3 #5)
+
+  1. 製品にCFP情報を登録
+   
+    実行者：B社
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
   {
     \"cfpId\": null,
-    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"traceId\": \"$btraceid\",
     \"ghgEmission\": 1.5,
     \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
     \"cfpType\": \"preProduction\",
@@ -478,7 +585,7 @@ data="[
   },
   {
     \"cfpId\": null,
-    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"traceId\": \"$btraceid\",
     \"ghgEmission\": 10.0,
     \"ghgDeclaredUnit\": "kgCO2e/kilogram\",
     \"cfpType\": \"mainProduction\",
@@ -491,7 +598,7 @@ data="[
   },
   {
     \"cfpId\": null,
-    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"traceId\": \"$btraceid\",
     \"ghgEmission\": 0,
     \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
     \"cfpType\": \"preComponent\",
@@ -504,7 +611,7 @@ data="[
   },
   {
     \"cfpId": null,
-    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"traceId\": \"$btraceid\",
     \"ghgEmission\": 0,
     \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
     \"cfpType\": \"mainComponent\",
@@ -517,41 +624,55 @@ data="[
   }
 ]"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $bapikey" \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer $token" \
+--header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
 ```
 
 
-
-
-
 ### B社の回答情報の取得およびA社の完成品のCFPを算出(基本フロー3 #6, #2)
+
+1. 回答依頼情報の取得
+
+    実行者：A社
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
 result=`curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"`
+--header "apiKey: $aapikey" \
+--header "Authorization: Bearer $atoken"`
 echo $result | jq
+atraceidb=`echo $result | jq -r .[0].downstreamTraceId`
+echo "atraceidb=$atraceidb"
 ```
 
+2. 依頼情報のステータスを確認
+  
+     実行者：A社
+
 ```
-url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=40b77952-2c89-49be-8ce9-7c64a15e0ae7"
+url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=$atraceidb"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token"`
 echo $result | jq
 ```
+
+
+### 完成品のCFP情報を算出する
+
+1. 製品にCFP情報を登録
+   
+ 実行者：A社
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
     {
         \"cfpId\": null,
-        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 3.0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"preProduction\",
@@ -564,7 +685,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 20.0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainProduction\",
@@ -577,7 +698,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"preComponent\",
@@ -590,7 +711,8 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"traceId": \"$atraceidb
+        \",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainComponent\",
@@ -603,18 +725,23 @@ data="[
     }
 ]"
 result=`curl -s --location --request PUT "$url" \
---header "apiKey: $apikey1" \
+--header "apiKey: $aapikey" \
 --header 'Content-Type: application/json' \
---header "Authorization: Bearer $token" \
+--header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
 ```
+### 完成品のCFP情報を算出する
+
+2. 登録したCFPの値を取得
+
+    実行者：A社
 
 ```
-url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=40b77952-2c89-49be-8ce9-7c64a15e0ae7"
+url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=$atraceidb"
 result=`curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"`
+--header "apiKey: $aapikey" \
+--header "Authorization: Bearer $atoken"`
 echo $result | jq
 ```
 
