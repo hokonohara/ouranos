@@ -255,10 +255,10 @@ docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env
 
 ```
 apikey1=Sample-APIKey1
-apikey2=Sample-APIKey2
 ```
 
 ```
+# CompanyA get access token
 url="http://localhost:8081/auth/login"
 data="{
   \"operatorAccountId\": \"oem_a@example.com\",
@@ -270,22 +270,24 @@ result=`curl -s --location --request POST "$url" \
 --data-raw "$data"`
 echo $result | jq
 token1=`echo $result | jq -r .accessToken`
-echo $token1
+echo "token1=$token1"
 ```
 
 ```
+# CompanyA check access token, get operatorId
 url="http://localhost:8081/api/v1/authInfo?dataTarget=operator"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1"`
 echo $result | jq
 operatorid1=`echo $result | jq -r .operatorId`
-echo $operatorid1
+echo "operatorid1=$operatorid1"
 ```
 
 ### 部品登録およびA社からB社へのCFP結果提出の依頼をする(基本フロー2 #4)
 
 ```
+# CompanyA create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
 data="{
   \"openPlantId\": \"1234567890123012345\",
@@ -302,20 +304,21 @@ result=`curl -s --location --request PUT "$url" \
 --data "$data"`
 echo $result | jq
 plantid1=`echo $result | jq -r .plantId`
-echo $plantid1
+echo "plantid1=$plantid1"
 ```
 
 ```
+# CompanyA create part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
-  "amountRequired": null,
-  "amountRequiredUnit": "kilogram",
-  "operatorId": "$operatorid1",
-  "partsName": "部品A",
-  "plantId": "$plantid1",
-  "supportPartsName": "modelA",
-  "terminatedFlag": false,
-  "traceId": null
+  \"amountRequired\": null,
+  \"amountRequiredUnit\": \"kilogram\",
+  \"operatorId\": \"$operatorid1\",
+  \"partsName\": \"部品A\",
+  \"plantId\": \"$plantid1\",
+  \"supportPartsName\": \"modelA\",
+  \"terminatedFlag\": false,
+  \"traceId\": null
 }"
 result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
@@ -323,31 +326,34 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $token1" \
 --data "$data"`
 echo $result | jq
+traceid1=`echo $result | jq -r .traceId`
+echo "traceid1=$traceid1"
 ```
 
 ```
+# CompanyA create part structure
 url="http://localhost:8080/api/v1/datatransport?dataTarget=partsStructure"
 data="{
-  "parentPartsModel": {
-    "amountRequired": null,
-    "amountRequiredUnit": "kilogram",
-    "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
-    "partsName": "部品A",
-    "plantId": "0cc8b4be-c727-4411-b478-2c874fbc6c25",
-    "supportPartsName": "modelA",
-    "terminatedFlag": false,
-    "traceId": "8fc6aa29-5f4f-476e-85e3-2d1b54715891"
+  \"parentPartsModel\": {
+    \"amountRequireddv": null,
+    \"amountRequiredUnit\": \"kilogram\",
+    \"operatorId\": \"$operatorid1\",
+    \"partsName\": \"部品A\",
+    \"plantId\": \"$plantid1\",
+    \"supportPartsName\": \"modelA\",
+    \"terminatedFlag\": false,
+    \"traceId\": \"traceid1\"
   },
-  "childrenPartsModel": [
+  \"childrenPartsModel\": [
     {
-      "amountRequired": 5,
-      "amountRequiredUnit": "kilogram",
-      "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
-      "partsName": "部品A1",
-      "plantId": "0cc8b4be-c727-4411-b478-2c874fbc6c25",
-      "supportPartsName": "modelA-1",
-      "terminatedFlag": false,
-      "traceId": null
+      \"amountRequired\": 5,
+      \"amountRequiredUnit\": \"kilogram\",
+      \"operatorId\": \"$operatorid1\",
+      \"partsName\": \"部品A1\",
+      \"plantId\": \"$plantid1\",
+      \"supportPartsNamedv": \"modelA-1\",
+      \"terminatedFlag\": false,
+      \"traceId\": null
     }
   ]
 }"
@@ -357,40 +363,56 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $token1" \
 --data "$data"`
 echo $result | jq
+traceid2=`echo $result | jq -r .childrenPartsModel[0].traceId`
+echo "traceid2=$traceid2"
 ```
 
 ```
-url="http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=1234567890124"
+# CompanyA find company B operatorId
+operatorb=1234567890124
+url="http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=$operatorb"
 curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1"
+operatorid2=`echo $result | jq -r .operatorId`
+echo "operatorid2=$operatorid2"
 ```
 
 
 ### B社からA社へ部品登録紐付けをする(基本フロー2 #31)
 
 ```
+apikey2=Sample-APIKey2
+```
+
+```
+# CompanyB get access token
 url="http://localhost:8081/auth/login"
 data="{
-  "operatorAccountId": "supplier_b@example.com",
-  "accountPassword": "supplierB&user_01"
+  \"operatorAccountId\": \"supplier_b@example.com\",
+  \"accountPassword\": \"supplierB&user_01\"
 }"
 result=`curl -s --location --request POST "$url" \
 --header 'Content-Type: application/json' \
 --header "apiKey: $apikey1" \
 --data-raw "$data"`
 echo $result | jq
+token2=`echo $result | jq -r .accessToken`
+echo "token2=$token2"
 ```
 
+CompanyB can use api to get his operatorid, but we already have it as operatorid2
+
 ```
+# CompanyB create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
 data="{
-  "openPlantId": "1234567890124012345",
-  "operatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
-  "plantAddress": "xx県xx市xxxx町2-1-1234",
-  "plantId": null,
-  "plantName": "B工場",
-  "plantAttribute": {}
+  \"openPlantId\": \"1234567890124012345\",
+  \"operatorId\": \"operatorid2\",
+  \"plantAddress\": \"xx県xx市xxxx町2-1-1234\",
+  \"plantId\": null,
+  \"plantName\": \"B工場\",
+  \"plantAttribute\": {}
 }"
 result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
@@ -403,14 +425,14 @@ echo $result | jq
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
-  "amountRequired": null,
-  "amountRequiredUnit": "kilogram",
-  "operatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
-  "partsName": "部品B",
-  "plantId": "544a5a35-dab3-469f-8ff5-116a4fe483e8",
-  "supportPartsName": "modelB",
-  "terminatedFlag": true,
-  "traceId": null
+  \"amountRequired\": null,
+  \"amountRequiredUnit\": \"kilogram\",
+  \"operatorId\": \"15572d1c-ec13-0d78-7f92-dd4278871373\",
+  \"partsName\": \"部品B\",
+  \"plantId\": \"544a5a35-dab3-469f-8ff5-116a4fe483e8\",
+  \"supportPartsName\": \"modelB\",
+  \"terminatedFlag\": true,
+  \"traceId\": null
 }"
 result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
@@ -442,55 +464,55 @@ echo $result | jq
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
   {
-    "cfpId": null,
-    "traceId": "2fb97052-250b-44de-acbb-1ba63e28af71",
-    "ghgEmission": 1.5,
-    "ghgDeclaredUnit": "kgCO2e/kilogram",
-    "cfpType": "preProduction",
-    "dqrType": "preProcessing",
-    "dqrValue": {
-      "TeR": 1,
-      "GeR": 2,
-      "TiR": 3
+    \"cfpId\": null,
+    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"ghgEmission\": 1.5,
+    \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+    \"cfpType\": \"preProduction\",
+    \"dqrType\": \"preProcessing\",
+    \"dqrValue\": {
+      \"TeR\": 1,
+      \"GeR\": 2,
+      \"TiR\": 3
     }
   },
   {
-    "cfpId": null,
-    "traceId": "2fb97052-250b-44de-acbb-1ba63e28af71",
-    "ghgEmission": 10.0,
-    "ghgDeclaredUnit": "kgCO2e/kilogram",
-    "cfpType": "mainProduction",
-    "dqrType": "mainProcessing",
-    "dqrValue": {
-      "TeR": 2,
-      "GeR": 3,
-      "TiR": 4
+    \"cfpId\": null,
+    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"ghgEmission\": 10.0,
+    \"ghgDeclaredUnit\": "kgCO2e/kilogram\",
+    \"cfpType\": \"mainProduction\",
+    \"dqrType\": \"mainProcessing\",
+    \"dqrValue\": {
+      \"TeR": 2,
+      \"GeR": 3,
+      \"TiR": 4
     }
   },
   {
-    "cfpId": null,
-    "traceId": "2fb97052-250b-44de-acbb-1ba63e28af71",
-    "ghgEmission": 0,
-    "ghgDeclaredUnit": "kgCO2e/kilogram",
-    "cfpType": "preComponent",
-    "dqrType": "preProcessing",
-    "dqrValue": {
-      "TeR": 1,
-      "GeR": 2,
-      "TiR": 3
+    \"cfpId\": null,
+    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"ghgEmission\": 0,
+    \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+    \"cfpType\": \"preComponent\",
+    \"dqrType\": \"preProcessing\",
+    \"dqrValue\": {
+      \"TeR\": 1,
+      \"GeR\": 2,
+      \"TiR\": 3
     }
   },
   {
-    "cfpId": null,
-    "traceId": "2fb97052-250b-44de-acbb-1ba63e28af71",
-    "ghgEmission": 0,
-    "ghgDeclaredUnit": "kgCO2e/kilogram",
-    "cfpType": "mainComponent",
-    "dqrType": "mainProcessing",
-    "dqrValue": {
-      "TeR": 2,
-      "GeR": 3,
-      "TiR": 4
+    \"cfpId": null,
+    \"traceId\": \"2fb97052-250b-44de-acbb-1ba63e28af71\",
+    \"ghgEmission\": 0,
+    \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+    \"cfpType\": \"mainComponent\",
+    \"dqrType\": \"mainProcessing\",
+    \"dqrValue\": {
+      \"TeR\": 2,
+      \"GeR\": 3,
+      \"TiR\": 4
     }
   }
 ]"
@@ -528,55 +550,55 @@ echo $result | jq
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
     {
-        "cfpId": null,
-        "traceId": "40b77952-2c89-49be-8ce9-7c64a15e0ae7",
-        "ghgEmission": 3.0,
-        "ghgDeclaredUnit": "kgCO2e/kilogram",
-        "cfpType": "preProduction",
-        "dqrType": "preProcessing",
-        "dqrValue": {
-            "TeR": 1,
-            "GeR": 2,
-            "TiR": 3
+        \"cfpId\": null,
+        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"ghgEmission\": 3.0,
+        \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+        \"cfpType\": \"preProduction\",
+        \"dqrType\": \"preProcessing\",
+        \"dqrValue\": {
+            \"TeR\": 1,
+            \"GeR\": 2,
+            \"TiR\": 3
         }
     },
     {
-        "cfpId": null,
-        "traceId": "40b77952-2c89-49be-8ce9-7c64a15e0ae7",
-        "ghgEmission": 20.0,
-        "ghgDeclaredUnit": "kgCO2e/kilogram",
-        "cfpType": "mainProduction",
-        "dqrType": "mainProcessing",
-        "dqrValue": {
-            "TeR": 2,
-            "GeR": 3,
-            "TiR": 4
+        \"cfpId\": null,
+        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"ghgEmission\": 20.0,
+        \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+        \"cfpType\": \"mainProduction\",
+        \"dqrType\": \"mainProcessing\",
+        \"dqrValue\": {
+            \"TeR\": 2,
+            \"GeR\": 3,
+            \"TiR\": 4
         }
     },
     {
-        "cfpId": null,
-        "traceId": "40b77952-2c89-49be-8ce9-7c64a15e0ae7",
-        "ghgEmission": 0,
-        "ghgDeclaredUnit": "kgCO2e/kilogram",
-        "cfpType": "preComponent",
-        "dqrType": "preProcessing",
-        "dqrValue": {
-            "TeR": 1,
-            "GeR": 2,
-            "TiR": 3
+        \"cfpId\": null,
+        \"traceId\": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"ghgEmission\": 0,
+        \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+        \"cfpType\": \"preComponent\",
+        \"dqrType\": \"preProcessing\",
+        \"dqrValue\": {
+            \"TeR\": 1,
+            \"GeR\": 2,
+            \"TiR\": 3
         }
     },
     {
-        "cfpId": null,
-        "traceId": "40b77952-2c89-49be-8ce9-7c64a15e0ae7",
-        "ghgEmission": 0,
-        "ghgDeclaredUnit": "kgCO2e/kilogram",
-        "cfpType": "mainComponent",
-        "dqrType": "mainProcessing",
-        "dqrValue": {
-            "TeR": 2,
-            "GeR": 3,
-            "TiR": 4
+        \"cfpId\": null,
+        \"traceId": \"40b77952-2c89-49be-8ce9-7c64a15e0ae7\",
+        \"ghgEmission\": 0,
+        \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
+        \"cfpType\": \"mainComponent\",
+        \"dqrType\": \"mainProcessing\",
+        \"dqrValue\": {
+            \"TeR\": 2,
+            \"GeR\": 3,
+            \"TiR\": 4
         }
     }
 ]"
