@@ -368,7 +368,7 @@ echo "atraceid1=$atraceid1"
 url="http://localhost:8080/api/v1/datatransport?dataTarget=partsStructure"
 data="{
   \"parentPartsModel\": {
-    \"amountRequireddv": null,
+    \"amountRequired\": null,
     \"amountRequiredUnit\": \"kilogram\",
     \"operatorId\": \"$aoperatorid\",
     \"partsName\": \"部品A\",
