@@ -257,17 +257,17 @@ apikey2=Sample-APIKey2
 ```
 
 ```
-result=eval curl -s --location --request POST "http://localhost:8081/auth/login" \
+data="{
+  \"operatorAccountId\": \"oem_a@example.com\",
+  \"accountPassword\": \"oemA&user_01\"
+}"
+result=`curl -s --location --request POST "http://localhost:8081/auth/login" \
 --header "Content-Type: application/json" \
 --header "apiKey: $apikey1" \
---data-raw '{
-  "operatorAccountId": "oem_a@example.com",
-  "accountPassword": "oemA&user_01"
-}' && echo $result | jq
-```
-
-```
-token1=`echo $result | jq -r .accessToken` && echo $token1
+--data-raw "$data"`
+echo $result | jq
+token1=`echo $result | jq -r .accessToken`
+echo $token1
 ```
 
 ```
