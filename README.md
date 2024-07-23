@@ -274,7 +274,7 @@ echo $token1
 ```
 
 ```
-url="http://localhost:8081/auth/login"
+url="http://localhost:8081/api/v1/authInfo?dataTarget=operator"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1"`
