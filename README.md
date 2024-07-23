@@ -265,7 +265,7 @@ docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env
    実行者：A社
 
 ```
-aapikey=Sample-APIKey
+aapikey=Sample-APIKey1
 aaccountid="oem_a@example.com"
 aaccountpass="oemA&user_01"
 ```
