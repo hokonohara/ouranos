@@ -431,7 +431,7 @@ echo "boperatorid=$boperatorid"
 # CompanyA request trading with CompanyB
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
 data="{
-  "statusModel": {
+  \"statusModel\": {
     \"message\": \"来月中にご回答をお願いします。\",
     \"replyMessage\": null,
     \"requestStatus\": {},
@@ -439,7 +439,7 @@ data="{
     \"statusId\": null,
     \"tradeId\": null
   },
-  "tradeModel": {
+  \"tradeModel\": {
     \"downstreamOperatorId\": \"$aoperatorid",
     \"downstreamTraceId\": \"$atraceid2",
     \"tradeId\": null,
