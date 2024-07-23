@@ -258,6 +258,9 @@ docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env
 ---
 ##  コマンドライン実行
 
+メモ
+- 時間置いて実行した場合、アクセストークンが切れるときに再度取得してくだい。
+
 ### 事業者認証
 
 1. 事業者認証の実行
@@ -305,12 +308,12 @@ echo "aoperatorid=$aoperatorid"
 
 1. 事業所の登録
 
+    実行者：A社
+
 ```
 aopenplantid=1234567890123012345
 ```
 
-    実行者：A社
-  
 ```
 # CompanyA create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
