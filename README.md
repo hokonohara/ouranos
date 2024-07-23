@@ -295,11 +295,11 @@ data="{
   \"plantName\": \"A工場\",
   \"plantAttribute\": {}
 }"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $token1" \
---data "$data"
+--data "$data"`
 echo $result | jq
 plantid1=`echo $result | jq -r .plantId`
 echo $plantid1
@@ -317,14 +317,13 @@ data="{
   "terminatedFlag": false,
   "traceId": null
 }"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $token1" \
---data "$data" && echo $result | jq
+--data "$data"`
+echo $result | jq
 ```
-
-
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=partsStructure"
@@ -352,11 +351,13 @@ data="{
     }
   ]
 }"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $token1" \
---data "$data" && echo $result | jq
+--data "$data"`
+echo $result | jq
+```
 
 ```
 url="http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=1234567890124"
@@ -364,12 +365,6 @@ curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
 --header "Authorization: Bearer $token1"
 ```
-
-```
-
-```
-```
-
 
 
 ### B社からA社へ部品登録紐付けをする(基本フロー2 #31)
@@ -380,10 +375,11 @@ data="{
   "operatorAccountId": "supplier_b@example.com",
   "accountPassword": "supplierB&user_01"
 }"
-result=eval curl -s --location --request POST "$url" \
+result=`curl -s --location --request POST "$url" \
 --header 'Content-Type: application/json' \
 --header "apiKey: $apikey1" \
---data-raw "$data" && echo $result | jq
+--data-raw "$data"`
+echo $result | jq
 ```
 
 ```
@@ -396,11 +392,12 @@ data="{
   "plantName": "B工場",
   "plantAttribute": {}
 }"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
---data "$data" && echo $result | jq
+--data "$data"`
+echo $result | jq
 ```
 
 ```
@@ -415,25 +412,27 @@ data="{
   "terminatedFlag": true,
   "traceId": null
 }"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
---data "$data" && echo $result | jq
+--data "$data"`
+echo $result | jq
 ```
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse"
-result=eval curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"
+--header "Authorization: Bearer $token"`
 ```
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=f475cb75-b3b8-4427-9e8d-376377f1c795&traceId=2fb97052-250b-44de-acbb-1ba63e28af71"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token" && echo $result | jq
+--header "Authorization: Bearer $token"`
+echo $result | jq
 ```
 
 
@@ -495,40 +494,34 @@ data="[
     }
   }
 ]"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
---data "$data" && echo $result | jq
+--data "$data"`
+echo $result | jq
 ```
 
-```
-```
 
-```
-```
 
-```
-```
-
-```
-```
 
 
 ### B社の回答情報の取得およびA社の完成品のCFPを算出(基本フロー3 #6, #2)
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
-result=eval curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token" && echo $result | jq
+--header "Authorization: Bearer $token"`
+echo $result | jq
 ```
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=40b77952-2c89-49be-8ce9-7c64a15e0ae7"
-result=eval curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token" && echo $result | jq
+--header "Authorization: Bearer $token"`
+echo $result | jq
 ```
 
 ```
@@ -587,18 +580,20 @@ data="[
         }
     }
 ]"
-result=eval curl -s --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $apikey1" \
 --header 'Content-Type: application/json' \
 --header "Authorization: Bearer $token" \
---data "$data" & echo $result | jq
+--data "$data"`
+echo $result | jq
 ```
 
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=40b77952-2c89-49be-8ce9-7c64a15e0ae7"
-result=eval curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token" && echo $result | jq
+--header "Authorization: Bearer $token"`
+echo $result | jq
 ```
 
 
