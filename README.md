@@ -719,7 +719,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId": \"$atraceidb\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainComponent\",
