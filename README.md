@@ -447,7 +447,7 @@ data="{
     \"upstreamTraceId\": null
   }
 }"
-result=`curl --location --request PUT "$url" \
+result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $aapikey" \
 --header "Content-Type: application/json" \
 --header "Authorization: Bearer $atoken" \
