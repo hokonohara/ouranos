@@ -415,9 +415,10 @@ operatorb=1234567890124
 ```
 # CompanyA find company B operatorId
 url="http://localhost:8081/api/v1/authInfo?dataTarget=operator&openOperatorId=$operatorb"
-curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
---header "Authorization: Bearer $atoken"
+--header "Authorization: Bearer $atoken"`
+echo $result | jq
 boperatorid=`echo $result | jq -r .operatorId`
 echo "boperatorid=$boperatorid"
 ```
