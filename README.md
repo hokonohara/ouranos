@@ -384,7 +384,7 @@ data="{
       \"operatorId\": \"$aoperatorid\",
       \"partsName\": \"部品A1\",
       \"plantId\": \"$aplantid\",
-      \"supportPartsNamedv": \"modelA-1\",
+      \"supportPartsName\": \"modelA-1\",
       \"terminatedFlag\": false,
       \"traceId\": null
     }
