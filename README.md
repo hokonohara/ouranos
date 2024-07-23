@@ -663,8 +663,8 @@ echo "atraceidb=$atraceidb"
 ```
 url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=$atraceidb"
 result=`curl -s --location --request GET "$url" \
---header "apiKey: $apikey1" \
---header "Authorization: Bearer $token"`
+--header "apiKey: $aapikey" \
+--header "Authorization: Bearer $atoken"`
 echo $result | jq
 ```
 
@@ -719,8 +719,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId": \"$atraceidb
-        \",
+        \"traceId": \"$atraceidb\",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainComponent\",
