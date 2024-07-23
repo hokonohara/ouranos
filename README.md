@@ -206,13 +206,14 @@ cd ../data-transaction-system
 ```
 go build main.go
 ```
+fix compability issues with newer docker.
 ```
 nano Dockerfile
 # change 'as' to 'AS' in line 1
 ```
 
 ```
-docker build -t data-space-backend .
+docker build -t data-spaces-backend .
 ```
 ```
 docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env-file config/local.env -p 8080:8080 --name data-spaces-backend data-spaces-backend
@@ -274,9 +275,9 @@ echo $token1
 
 ```
 url="http://localhost:8081/auth/login"
-result=eval curl -s --location --request GET "$url" \
+result=`curl -s --location --request GET "$url" \
 --header "apiKey: $apikey1" \
---header "Authorization: Bearer $token1"
+--header "Authorization: Bearer $token1"`
 echo $result | jq
 operatorid1=`echo $result | jq -r .operatorId`
 echo $operatorid1
