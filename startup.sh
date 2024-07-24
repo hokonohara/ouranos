@@ -18,21 +18,21 @@ make idp-add-local
 read -n 1
 
 docker run \
- -v $(pwd)/config/:/app/config/ \
+ -v ~/workspace/data-transaction-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file config/local.env \
+ --env-file ~/workspace/data-transaction-system/config/local.env \
  -p 8080:8080 \
  --name data-spaces-backend data-spaces-backend
 
 read -n 1
 
 docker run \
- -v $(pwd)/config/:/app/config/ \
+ -v ~/workspace/user-authentiaction-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file config/local.env \
+ --env-file ~/workspace/user-authentiaction-system/config/local.env \
  -p 8081:8081 \
  --name authenticator-backend authenticator-backend
 
  read -n 1
- 
- docker ps -a --format "{{.Name}}\t{{.State}}"
+
+ docker ps -a --format "{{.Names}}\t{{.State}}"

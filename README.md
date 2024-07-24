@@ -235,11 +235,23 @@ make idp-add-local
 ```
 
 ```
-docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env-file config/local.env -p 8080:8080 --name data-spaces-backend data-spaces-backend
+docker run \
+ -v ~/workspace/data-transaction-system/config/:/app/config/ \
+ -td -i --network docker.internal \
+ --env-file ~/workspace/data-transaction-system/config/local.env \
+ -p 8080:8080 \
+ --name data-spaces-backend \
+ data-spaces-backend
 ```
 
 ```
-docker run -v $(pwd)/config/:/app/config/ -td -i --network docker.internal --env-file config/local.env -p 8081:8081 --name authenticator-backend authenticator-backend
+docker run \
+ -v ~/workspace/user-authentiaction-system/config/:/app/config/ \
+ -td -i --network docker.internal \
+ --env-file ~/workspace/user-authentiaction-system/config/local.env \
+ -p 8081:8081 \
+ --name authenticator-backend \
+ authenticator-backend
 ```
 
 
