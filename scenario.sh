@@ -327,7 +327,7 @@ result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
 --header "Authorization: Bearer $atoken"`
 echo $result | jq
-atraceidb=`echo $result | jq -r .[0].upstreamTraceId`
+atraceidb=`echo $result | jq -r .[0].downstreamTraceId`
 echo "atraceidb=$atraceidb"
 
 read -n 1 -p "press any key to continue"
