@@ -675,7 +675,7 @@ result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
 --header "Authorization: Bearer $atoken"`
 echo $result | jq
-atraceidb=`echo $result | jq -r .[0].downstreamTraceId`
+atraceidb=`echo $result | jq -r .[0].upstreamTraceId`
 echo "atraceidb=$atraceidb"
 ```
 
