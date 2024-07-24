@@ -27,9 +27,9 @@ docker run \
 read -n 1
 
 docker run \
- -v ~/workspace/user-authentiaction-system/config/:/app/config/ \
+ -v ~/workspace/user-authentication-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file ~/workspace/user-authentiaction-system/config/local.env \
+ --env-file ~/workspace/user-authentication-system/config/local.env \
  -p 8081:8081 \
  --name authenticator-backend authenticator-backend
 
