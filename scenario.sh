@@ -1,3 +1,5 @@
+#!/bin/bash
+set -x
 
 aapikey=Sample-APIKey1
 aaccountid="oem_a@example.com"
@@ -211,6 +213,7 @@ echo "bplantid=$bplantid"
 
 read -n 1 -p "press any key to continue"
 
+# CompanyB create part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
   \"amountRequired\": null,
@@ -228,9 +231,12 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
+btraceid=`echo $result | jq -r .traceId`
+echo "btraceid=$btraceid"
 
 read -n 1 -p "press any key to continue"
 
+# CompanyB check trade response
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $bapikey" \
@@ -241,6 +247,7 @@ echo "btradeid=$btradeid"
 
 read -n 1 -p "press any key to continue"
 
+# CompanyB link part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=$btradeid&traceId=$btraceid"
 result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $bapikey" \
@@ -249,6 +256,7 @@ echo $result | jq
 
 read -n 1 -p "press any key to continue"
 
+# CompanyB register CFP data
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
   {
@@ -313,6 +321,7 @@ echo $result | jq
 
 read -n 1 -p "press any key to continue"
 
+# CompanyA get trade response
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
@@ -323,6 +332,7 @@ echo "atraceidb=$atraceidb"
 
 read -n 1 -p "press any key to continue"
 
+# CompanyA get response status
 url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=$atraceidb"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
@@ -331,6 +341,7 @@ echo $result | jq
 
 read -n 1 -p "press any key to continue"
 
+# CompanyA get complete CFP data
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
     {
@@ -395,6 +406,7 @@ echo $result | jq
 
 read -n 1 -p "press any key to continue"
 
+# CompanyA get complete CFP calculation
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=$atraceidb"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \

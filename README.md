@@ -506,11 +506,12 @@ echo "btoken=$btoken"
 CompanyB can use api to get his operatorid, but we already have it as boperatorid
 
 2. 事業所の登録
+
+    実行者：B社
+
 ```
 bopenplantid=1234567890124012345
 ```
-
-    実行者：B社
 
 ```
 # CompanyB create plant
@@ -538,6 +539,7 @@ echo "bplantid=$bplantid"
     実行者：B社
 
 ```
+# CompanyB create part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=parts"
 data="{
   \"amountRequired\": null,
@@ -555,6 +557,8 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $btoken" \
 --data "$data"`
 echo $result | jq
+btraceid=`echo $result | jq -r .traceId`
+echo "btraceid=$btraceid"
 
 ```
 
@@ -563,6 +567,7 @@ echo $result | jq
     実行者：B社
 
 ```
+# CompanyB check trade response
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $bapikey" \
@@ -577,6 +582,7 @@ echo "btradeid=$btradeid"
    実行者：B社
 
 ```
+# CompanyB link part
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeResponse&tradeId=$btradeid&traceId=$btraceid"
 result=`curl -s --location --request PUT "$url" \
 --header "apiKey: $bapikey" \
@@ -588,9 +594,10 @@ echo $result | jq
 
   1. 製品にCFP情報を登録
    
-    実行者：B社
+      実行者：B社
 
 ```
+# CompanyB register CFP data
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
   {
@@ -662,6 +669,7 @@ echo $result | jq
     実行者：A社
 
 ```
+# CompanyA get trade response
 url="http://localhost:8080/api/v1/datatransport?dataTarget=tradeRequest"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
@@ -676,6 +684,7 @@ echo "atraceidb=$atraceidb"
      実行者：A社
 
 ```
+# CompanyA get response status
 url="http://localhost:8080/api/v1/datatransport?dataTarget=status&statusTarget=REQUEST&traceId=$atraceidb"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
@@ -688,9 +697,10 @@ echo $result | jq
 
 1. 製品にCFP情報を登録
    
- 実行者：A社
+    実行者：A社
 
 ```
+# CompanyA get complete CFP data
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
     {
@@ -760,6 +770,7 @@ echo $result | jq
     実行者：A社
 
 ```
+# CompanyA get complete CFP calculation
 url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp&traceIds=$atraceidb"
 result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
