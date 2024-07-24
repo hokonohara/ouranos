@@ -7,4 +7,8 @@ docker rm data-spaces-backend
 
 docker volume rm user-authentication-system_db-vol
 
+docker ps -a
+docker volume list
+
+
 
