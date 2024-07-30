@@ -1,15 +1,27 @@
 # Ouranosモック環境 インストール、セットアップと実行 
 
-Ouranos サンプル関連手順
+![[firstDiagram.png]]
+<details>
+
+```
+@startuml firstDiagram
+
+Alice -> Bob: Hello
+Bob -> Alice: Hi!
+		
+@enduml
+```
+
+</details>
+
+Ouranosサンプル関連手順
 
 参考：https://github.com/ouranos-ecosystem-idi
 
 ## 確認環境 
 
-仮想マシン：Ubuntu 24.04、8GBメモリ、127GB仮想ディスク
-
-ホストマシン：Windows 11、Hyper-V
-
+仮想マシン：Ubuntu 24.04、8GBメモリ、127GB仮想ディスク  
+ホストマシン：Windows 11、Hyper-V  
 作業フォルダー: ~/workspace
 
 メモ: 
@@ -140,7 +152,7 @@ sudo apt update
 sudo apt install dbeaver-ce
 ```
 
-メモ: DB接続ためのユーザ/パスはデフォールトで、dhuser/passw0rd (注意:dbuserではない)
+メモ: DB接続ためのDB名、ユーザ/パスはデフォールトで、dhlocal/huser/passw0rd (注意:db*ではない)
 
 #### ouranos repository
 
