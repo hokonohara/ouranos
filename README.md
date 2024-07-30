@@ -273,7 +273,7 @@ docker run \
    実行者：A社
 
 ```
-# CompanyA authentication data, previous set in firebase
+# CompanyA authentication data, previous set in DB and firebase
 aapikey=Sample-APIKey1
 aaccountid="oem_a@example.com"
 aaccountpass="oemA&user_01"
@@ -304,7 +304,7 @@ echo "atoken=$atoken"
   "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
   "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIiLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
 {
-  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
+  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInzZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
   "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIiLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
 }
 atoken=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.
@@ -335,9 +335,10 @@ echo "aoperatorid=$aoperatorid"
     実行者：A社
 
 ```
+# CompanyA plant id
 aopenplantid=1234567890123012345
 ```
-
+z
 ```
 # CompanyA create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
@@ -435,6 +436,7 @@ echo "atraceid2=$atraceid2"
  公開されたB社情報(他社検索用)
 
 ```
+# CompanyB known id, previously registerd on DB
 operatorb=1234567890124
 ```
 
@@ -497,6 +499,7 @@ echo "astatusid=$astatusid"
     実行者：B社
 
 ```
+# CompanyB authentication data, previous set in DB and firebase
 bapikey=Sample-APIKey2
 baccountid="supplier_b@example.com"
 baccountpass="supplierB&user_01"
@@ -525,6 +528,7 @@ CompanyB can use api to get his operatorid, but we already have it as boperatori
     実行者：B社
 
 ```
+# CompanyB plant id
 bopenplantid=1234567890124012345
 ```
 
