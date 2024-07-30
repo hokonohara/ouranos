@@ -1,15 +1,10 @@
-
----
----
----
-
-# Ouranosモック環境インストール、セットアップと実行
+# Ouranosモック環境 インストール、セットアップと実行 
 
 Ouranos サンプル関連手順
 
 参考：https://github.com/ouranos-ecosystem-idi
 
-### 確認環境
+## 確認環境 
 
 仮想マシン：Ubuntu 24.04、8GBメモリ、127GB仮想ディスク
 
@@ -20,9 +15,9 @@ Ouranos サンプル関連手順
 メモ: 
 
 1. Ubuntu 24.04で確認、その他のディストロでも恐らく動くが、インストールするリナックス・パッケージが異なる可能性があります。
-2. Ouranosリポジトリは、workspaceとsoftwareフォルダー使っているが、ここで全部workspaceで行う。
+2. Ouranosリポジトリ手順は、workspaceとsoftwareの２つフォルダー使っているが、ここで全部workspaceで行う。
 3. Ouranosリポジトリは、LinuxとWindowsで作業や使用バイナリになるが、ここで全部Ubuntuで行う。
-4. 実行例(curl)を一つ一つ前の結果をコピペ―しないように、環境変数を使う。
+4. 実行例(curl)を前の結果をコピペーストしないように、環境変数を使う。
 
 
 コンテント：
@@ -43,8 +38,8 @@ Ouranos サンプル関連手順
 ```
 sudo apt update
 sudo apt upgrade -y
-sudo apt install build-essential
-sudo apt install curl
+sudo apt install -y build-essential
+sudo apt install -y curl
 ```
 #### docker
 
@@ -64,7 +59,7 @@ echo \
 sudo apt-get update
 ```
 ```
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 ```
 sudo usermod -aG docker $USER
@@ -280,6 +275,7 @@ docker run \
    実行者：A社
 
 ```
+# CompanyA authentication data, previous set in firebase
 aapikey=Sample-APIKey1
 aaccountid="oem_a@example.com"
 aaccountpass="oemA&user_01"
@@ -297,6 +293,7 @@ result=`curl -s --location --request POST "$url" \
 --header "apiKey: $aapikey" \
 --data-raw "$data"`
 echo $result | jq
+# CompanyA access token
 atoken=`echo $result | jq -r .accessToken`
 echo "atoken=$atoken"
 ```
@@ -312,6 +309,7 @@ result=`curl -s --location --request GET "$url" \
 --header "apiKey: $aapikey" \
 --header "Authorization: Bearer $atoken"`
 echo $result | jq
+# CompanyA operatodId
 aoperatorid=`echo $result | jq -r .operatorId`
 echo "aoperatorid=$aoperatorid"
 ```
@@ -343,6 +341,7 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
+# CompanyA plantId
 aplantid=`echo $result | jq -r .plantId`
 echo "aplantid=$aplantid"
 ```
@@ -370,6 +369,7 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
+# CompanyA part's traceId
 atraceid1=`echo $result | jq -r .traceId`
 echo "atraceid1=$atraceid1"
 ```
@@ -411,6 +411,7 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $atoken" \
 --data "$data"`
 echo $result | jq
+# CompanyA sub part's traceId
 atraceid2=`echo $result | jq -r .childrenPartsModel[0].traceId`
 echo "atraceid2=$atraceid2"
 ```
