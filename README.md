@@ -338,7 +338,7 @@ echo "aoperatorid=$aoperatorid"
 # CompanyA plant id
 aopenplantid=1234567890123012345
 ```
-z
+
 ```
 # CompanyA create plant
 url="http://localhost:8081/api/v1/authInfo?dataTarget=plant"
