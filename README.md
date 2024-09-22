@@ -8,12 +8,12 @@ Ouranosサンプル関連手順
 
 仮想マシン：Ubuntu 24.04、8GBメモリ、127GB仮想ディスク  
 ホストマシン：Windows 11、Hyper-V  
-作業フォルダー: ~/workspace
+作業フォルダー: ~/ouranos
 
 メモ: 
 
 1. Ubuntu 24.04で確認、その他のディストロでも恐らく動くが、インストールするリナックス・パッケージが異なる可能性があります。
-2. Ouranosリポジトリ手順は、workspaceとsoftwareの２つフォルダー使っているが、ここで全部workspaceで行う。
+2. Ouranosリポジトリ手順は、workspaceとsoftwareの２つフォルダー使っているが、ここで全部~/ouranosで行う。
 3. Ouranosリポジトリは、LinuxとWindowsで作業や使用バイナリになるが、ここで全部Ubuntuで行う。
 4. 実行例(curl)を前の結果をコピペーストしないように、環境変数を使う。
 
@@ -146,10 +146,10 @@ sudo apt install dbeaver-ce
 cd
 ```
 ```
-mkdir workspace
+mkdir ouranos
 ```
 ```
-cd workspace
+cd ouranos
 ```
 ```
 git clone https://github.com/ouranos-ecosystem-idi/data-transaction-system
@@ -229,9 +229,9 @@ make idp-add-local
 
 ```
 docker run \
- -v ~/workspace/data-transaction-system/config/:/app/config/ \
+ -v ~/ouranos/data-transaction-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file ~/workspace/data-transaction-system/config/local.env \
+ --env-file ~/ouranos/data-transaction-system/config/local.env \
  -p 8080:8080 \
  --name data-spaces-backend \
  data-spaces-backend
@@ -239,9 +239,9 @@ docker run \
 
 ```
 docker run \
- -v ~/workspace/user-authentication-system/config/:/app/config/ \
+ -v ~/ouranos/user-authentication-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file ~/workspace/user-authentication-system/config/local.env \
+ --env-file ~/ouranos/user-authentication-system/config/local.env \
  -p 8081:8081 \
  --name authenticator-backend \
  authenticator-backend
