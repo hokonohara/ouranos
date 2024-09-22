@@ -272,6 +272,9 @@ docker run \
  authenticator-backend
 ```
 
+```
+docker ps -a
+```
 <details closez>
 <summary>サンプル出力</summary>
 
