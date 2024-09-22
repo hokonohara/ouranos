@@ -354,13 +354,10 @@ echo "atoken=$atoken"
 <summary>サンプル出力</summary>
 ```
 {
-  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
-  "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIiLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
-{
-  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInzZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
-  "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIiLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
+  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyNzAxOTU3OSwidXNlcl9pZCI6IjdiY2Q5ZWQxLWVmMzktNDNkNy1hZTY4LWJiNzE1NGY0MTIyNyIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjcwMTk1NzksImV4cCI6MTcyNzAyMzE3OSwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiI3YmNkOWVkMS1lZjM5LTQzZDctYWU2OC1iYjcxNTRmNDEyMjcifQ.",
+  "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiI3YmNkOWVkMS1lZjM5LTQzZDctYWU2OC1iYjcxNTRmNDEyMjciLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
 }
-atoken=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.
+atoken=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyNzAxOTU3OSwidXNlcl9pZCI6IjdiY2Q5ZWQxLWVmMzktNDNkNy1hZTY4LWJiNzE1NGY0MTIyNyIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjcwMTk1NzksImV4cCI6MTcyNzAyMzE3OSwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiI3YmNkOWVkMS1lZjM5LTQzZDctYWU2OC1iYjcxNTRmNDEyMjcifQ.
 ```
 </details>
 
@@ -384,7 +381,16 @@ echo "aoperatorid=$aoperatorid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+  "operatorName": "A社",
+  "operatorAddress": "東京都渋谷区xx",
+  "openOperatorId": "1234567890123",
+  "operatorAttribute": {
+    "globalOperatorId": "1234ABCD5678EFGH0123"
+  }
+}
+aoperatorid=b39e6248-c888-56ca-d9d0-89de1b1adc8e
 ```
 
 </details>
@@ -427,7 +433,17 @@ echo "aplantid=$aplantid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "plantId": "170c0850-6aae-4269-8e08-f71e4fab9b52",
+  "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+  "plantName": "A工場",
+  "plantAddress": "xx県xx市xxxx町1-1-1234",
+  "openPlantId": "1234567890123012345",
+  "plantAttribute": {
+    "globalPlantId": null
+  }
+}
+aplantid=170c0850-6aae-4269-8e08-f71e4fab9b52
 ```
 
 </details>
@@ -465,7 +481,17 @@ echo "atraceid1=$atraceid1"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "traceId": "4fe20864-8669-4977-a6a6-24c66bf10294",
+  "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+  "plantId": "170c0850-6aae-4269-8e08-f71e4fab9b52",
+  "partsName": "部品A",
+  "supportPartsName": "modelA",
+  "terminatedFlag": false,
+  "amountRequired": null,
+  "amountRequiredUnit": "kilogram"
+}
+atraceid1=4fe20864-8669-4977-a6a6-24c66bf10294
 ```
 
 </details>
@@ -517,7 +543,31 @@ echo "atraceid2=$atraceid2"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "parentPartsModel": {
+    "traceId": "4fe20864-8669-4977-a6a6-24c66bf10294",
+    "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+    "plantId": "170c0850-6aae-4269-8e08-f71e4fab9b52",
+    "partsName": "部品A",
+    "supportPartsName": "modelA",
+    "terminatedFlag": false,
+    "amountRequired": null,
+    "amountRequiredUnit": "kilogram"
+  },
+  "childrenPartsModel": [
+    {
+      "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+      "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+      "plantId": "170c0850-6aae-4269-8e08-f71e4fab9b52",
+      "partsName": "部品A1",
+      "supportPartsName": "modelA-1",
+      "terminatedFlag": false,
+      "amountRequired": 5,
+      "amountRequiredUnit": "kilogram"
+    }
+  ]
+}
+atraceid2=8ebd21b5-9620-4fb7-b786-de8884ffd3d1
 ```
 
 </details>
@@ -551,7 +601,16 @@ echo "boperatorid=$boperatorid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "operatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+  "operatorName": "B社",
+  "operatorAddress": "東京都渋谷区xx",
+  "openOperatorId": "1234567890124",
+  "operatorAttribute": {
+    "globalOperatorId": "1234ABCD5678EFGH0124"
+  }
+}
+boperatorid=15572d1c-ec13-0d78-7f92-dd4278871373
 ```
 
 </details>
@@ -597,7 +656,28 @@ echo "astatusid=$astatusid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "tradeModel": {
+    "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+    "downstreamOperatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+    "upstreamOperatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+    "downstreamTraceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "upstreamTraceId": null
+  },
+  "statusModel": {
+    "statusId": "dc3746af-9104-41b5-8a64-438167570de3",
+    "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+    "requestStatus": {
+      "cfpResponseStatus": "NOT_COMPLETED",
+      "tradeTreeStatus": "UNTERMINATED"
+    },
+    "message": "来月中にご回答をお願いします。",
+    "replyMessage": null,
+    "requestType": "CFP"
+  }
+}
+atradeid=e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0
+astatusid=dc3746af-9104-41b5-8a64-438167570de3
 ```
 
 </details>
@@ -637,7 +717,11 @@ echo "btoken=$btoken"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6IjE1NTcyZDFjLWVjMTMtMGQ3OC03ZjkyLWRkNDI3ODg3MTM3MyIsImVtYWlsIjoic3VwcGxpZXJfYkBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiYXV0aF90aW1lIjoxNzI3MDE5ODk1LCJ1c2VyX2lkIjoiZGExMGI3ZjUtM2RiMC00NmI5LTgwMjUtZDNiNDRhMTBjZmJhIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJzdXBwbGllcl9iQGV4YW1wbGUuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifSwiaWF0IjoxNzI3MDE5ODk1LCJleHAiOjE3MjcwMjM0OTUsImF1ZCI6ImxvY2FsIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2xvY2FsIiwic3ViIjoiZGExMGI3ZjUtM2RiMC00NmI5LTgwMjUtZDNiNDRhMTBjZmJhIn0.",
+  "refreshToken": "eyJfQXV0aEVtdWxhdG9yUmVmcmVzaFRva2VuIjoiRE8gTk9UIE1PRElGWSIsImxvY2FsSWQiOiJkYTEwYjdmNS0zZGIwLTQ2YjktODAyNS1kM2I0NGExMGNmYmEiLCJwcm92aWRlciI6InBhc3N3b3JkIiwiZXh0cmFDbGFpbXMiOnt9LCJwcm9qZWN0SWQiOiJsb2NhbCJ9"
+}
+btoken=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6IjE1NTcyZDFjLWVjMTMtMGQ3OC03ZjkyLWRkNDI3ODg3MTM3MyIsImVtYWlsIjoic3VwcGxpZXJfYkBleGFtcGxlLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiYXV0aF90aW1lIjoxNzI3MDE5ODk1LCJ1c2VyX2lkIjoiZGExMGI3ZjUtM2RiMC00NmI5LTgwMjUtZDNiNDRhMTBjZmJhIiwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJzdXBwbGllcl9iQGV4YW1wbGUuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifSwiaWF0IjoxNzI3MDE5ODk1LCJleHAiOjE3MjcwMjM0OTUsImF1ZCI6ImxvY2FsIiwiaXNzIjoiaHR0cHM6Ly9zZWN1cmV0b2tlbi5nb29nbGUuY29tL2xvY2FsIiwic3ViIjoiZGExMGI3ZjUtM2RiMC00NmI5LTgwMjUtZDNiNDRhMTBjZmJhIn0.
 ```
 
 </details>
@@ -679,7 +763,17 @@ echo "bplantid=$bplantid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "plantId": "37b2d740-e200-4a79-9181-27bedf2873d9",
+  "operatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+  "plantName": "B工場",
+  "plantAddress": "xx県xx市xxxx町2-1-1234",
+  "openPlantId": "1234567890124012345",
+  "plantAttribute": {
+    "globalPlantId": null
+  }
+}
+bplantid=37b2d740-e200-4a79-9181-27bedf2873d9
 ```
 
 </details>
@@ -716,7 +810,17 @@ echo "btraceid=$btraceid"
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "traceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa",
+  "operatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+  "plantId": "37b2d740-e200-4a79-9181-27bedf2873d9",
+  "partsName": "部品B",
+  "supportPartsName": "modelB",
+  "terminatedFlag": true,
+  "amountRequired": null,
+  "amountRequiredUnit": "kilogram"
+}
+btraceid=5bee5dbe-f70a-4f6c-835b-a129f794a6aa
 ```
 
 </details>
@@ -741,7 +845,39 @@ echo "btradeid=$btradeid"
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "statusModel": {
+      "statusId": "dc3746af-9104-41b5-8a64-438167570de3",
+      "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+      "requestStatus": {
+        "cfpResponseStatus": "NOT_COMPLETED",
+        "tradeTreeStatus": "UNTERMINATED"
+      },
+      "message": "来月中にご回答をお願いします。",
+      "replyMessage": null,
+      "requestType": "CFP"
+    },
+    "tradeModel": {
+      "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+      "downstreamOperatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+      "upstreamOperatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+      "downstreamTraceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+      "upstreamTraceId": null
+    },
+    "partsModel": {
+      "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+      "operatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+      "plantId": "170c0850-6aae-4269-8e08-f71e4fab9b52",
+      "partsName": "部品A1",
+      "supportPartsName": "modelA-1",
+      "terminatedFlag": false,
+      "amountRequired": null,
+      "amountRequiredUnit": "kilogram"
+    }
+  }
+]
+btradeid=e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0
 ```
 
 </details>
@@ -764,7 +900,13 @@ echo $result | jq
 <summary>サンプル出力</summary>
 
 ```
-
+{
+  "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+  "downstreamOperatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+  "upstreamOperatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+  "downstreamTraceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+  "upstreamTraceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa"
+}
 ```
 
 </details>
@@ -845,7 +987,60 @@ echo $result | jq
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "cfpId": "98dd124f-be2c-4657-8169-c9b15cd758c7",
+    "traceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa",
+    "ghgEmission": 1.5,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "preProduction",
+    "dqrType": "preProcessing",
+    "dqrValue": {
+      "TeR": 1,
+      "GeR": 2,
+      "TiR": 3
+    }
+  },
+  {
+    "cfpId": "98dd124f-be2c-4657-8169-c9b15cd758c7",
+    "traceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa",
+    "ghgEmission": 10,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "mainProduction",
+    "dqrType": "mainProcessing",
+    "dqrValue": {
+      "TeR": 2,
+      "GeR": 3,
+      "TiR": 4
+    }
+  },
+  {
+    "cfpId": "98dd124f-be2c-4657-8169-c9b15cd758c7",
+    "traceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa",
+    "ghgEmission": 0,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "preComponent",
+    "dqrType": "preProcessing",
+    "dqrValue": {
+      "TeR": 1,
+      "GeR": 2,
+      "TiR": 3
+    }
+  },
+  {
+    "cfpId": "98dd124f-be2c-4657-8169-c9b15cd758c7",
+    "traceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa",
+    "ghgEmission": 0,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "mainComponent",
+    "dqrType": "mainProcessing",
+    "dqrValue": {
+      "TeR": 2,
+      "GeR": 3,
+      "TiR": 4
+    }
+  }
+]
 ```
 
 </details>
@@ -873,7 +1068,16 @@ echo "atraceidb=$atraceidb"
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+    "downstreamOperatorId": "b39e6248-c888-56ca-d9d0-89de1b1adc8e",
+    "upstreamOperatorId": "15572d1c-ec13-0d78-7f92-dd4278871373",
+    "downstreamTraceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "upstreamTraceId": "5bee5dbe-f70a-4f6c-835b-a129f794a6aa"
+  }
+]
+atraceidb=8ebd21b5-9620-4fb7-b786-de8884ffd3d1
 ```
 
 </details>
@@ -896,7 +1100,19 @@ echo $result | jq
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "statusId": "dc3746af-9104-41b5-8a64-438167570de3",
+    "tradeId": "e45c0bb8-ff5b-4f62-b392-411c5eb7d2b0",
+    "requestStatus": {
+      "cfpResponseStatus": "COMPLETED",
+      "tradeTreeStatus": "TERMINATED"
+    },
+    "message": "来月中にご回答をお願いします。",
+    "replyMessage": null,
+    "requestType": "CFP"
+  }
+]
 ```
 
 </details>
@@ -973,12 +1189,64 @@ result=`curl -s --location --request PUT "$url" \
 echo $result | jq
 ```
 
-
 <details closez>
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "cfpId": "97c7072a-f70a-4711-9b67-e71efb92ab8c",
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 3,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "preProduction",
+    "dqrType": "preProcessing",
+    "dqrValue": {
+      "TeR": 1,
+      "GeR": 2,
+      "TiR": 3
+    }
+  },
+  {
+    "cfpId": "97c7072a-f70a-4711-9b67-e71efb92ab8c",
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 20,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "mainProduction",
+    "dqrType": "mainProcessing",
+    "dqrValue": {
+      "TeR": 2,
+      "GeR": 3,
+      "TiR": 4
+    }
+  },
+  {
+    "cfpId": "97c7072a-f70a-4711-9b67-e71efb92ab8c",
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 0,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "preComponent",
+    "dqrType": "preProcessing",
+    "dqrValue": {
+      "TeR": 1,
+      "GeR": 2,
+      "TiR": 3
+    }
+  },
+  {
+    "cfpId": "97c7072a-f70a-4711-9b67-e71efb92ab8c",
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 0,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "mainComponent",
+    "dqrType": "mainProcessing",
+    "dqrValue": {
+      "TeR": 2,
+      "GeR": 3,
+      "TiR": 4
+    }
+  }
+]
 ```
 
 </details>
@@ -1003,7 +1271,34 @@ echo $result | jq
 <summary>サンプル出力</summary>
 
 ```
-
+[
+  {
+    "cfpId": null,
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 1.5,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "preProductionResponse",
+    "dqrType": "preProcessingResponse",
+    "dqrValue": {
+      "TeR": 2.1,
+      "GeR": 0,
+      "TiR": null
+    }
+  },
+  {
+    "cfpId": null,
+    "traceId": "8ebd21b5-9620-4fb7-b786-de8884ffd3d1",
+    "ghgEmission": 10,
+    "ghgDeclaredUnit": "kgCO2e/kilogram",
+    "cfpType": "mainProductionResponse",
+    "dqrType": "mainProcessingResponse",
+    "dqrValue": {
+      "TeR": 2.1,
+      "GeR": 0,
+      "TiR": null
+    }
+  }
+]
 ```
 
 </details>
