@@ -161,6 +161,8 @@ git clone https://github.com/ouranos-ecosystem-idi/data-transaction-system
 git clone https://github.com/ouranos-ecosystem-idi/user-authentication-system
 ```
 
+
+<!--
 ### pull docker images
 
 ```
@@ -175,6 +177,8 @@ cd ../user-authentication-system
 ```
 docker compose pull
 ```
+-->
+
 
 ### ビルド
 
@@ -208,6 +212,33 @@ sed -i 's/as/AS/' Dockerfile
 ```
 docker build -t authenticator-backend .
 ```
+
+### Check docker images
+```
+docker images
+```
+<details closez>
+<summary>サンプル出力</summary>
+```
+REPOSITORY                            TAG       IMAGE ID       CREATED          SIZE
+user-authentication-system-firebase   latest    38ec8e7aa89d   9 minutes ago    292MB
+authenticator-backend                 latest    144633d215fc   18 minutes ago   45.6MB
+data-spaces-backend                   latest    2d38ec9936af   20 minutes ago   33.8MB
+postgres                              14        480f26a07aa1   6 weeks ago      422MB
+```
+</details>
+
+```
+docker volume ls
+```
+<details closez>
+<summary>サンプル出力</summary>
+```
+DRIVER    VOLUME NAME
+local     user-authentication-system_db-vol
+```
+</details>
+
 
 ### docker実行
 
@@ -249,6 +280,17 @@ docker run \
  --name authenticator-backend \
  authenticator-backend
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+```
+CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                  NAMES
+d709dac190f7   postgres:14                           "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp                                              postgres
+1d481c4ead1e   user-authentication-system-firebase   "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   0.0.0.0:4000->4000/tcp, :::4000->4000/tcp, 0.0.0.0:9099->9099/tcp, :::9099->9099/tcp   user-authentication-system-firebase-1
+10334cce99b8   authenticator-backend                 "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp                                              authenticator-backend
+e903cb5701dc   data-spaces-backend                   "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                              data-spaces-backend
+```
+</details>
 
 
 メモ
@@ -301,7 +343,6 @@ echo "atoken=$atoken"
 
 <details closez>
 <summary>サンプル出力</summary>
-
 ```
 {
   "accessToken": "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.",
@@ -312,8 +353,7 @@ echo "atoken=$atoken"
 }
 atoken=eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJvcGVyYXRvcl9pZCI6ImIzOWU2MjQ4LWM4ODgtNTZjYS1kOWQwLTg5ZGUxYjFhZGM4ZSIsImVtYWlsIjoib2VtX2FAZXhhbXBsZS5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsImF1dGhfdGltZSI6MTcyMjM3NTAyNCwidXNlcl9pZCI6ImY4ODJmODk5LWE4OWItNGQ2ZS1hN2FjLTk1ZmMyMGViYWNiMiIsImZpcmViYXNlIjp7ImlkZW50aXRpZXMiOnsiZW1haWwiOlsib2VtX2FAZXhhbXBsZS5jb20iXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9LCJpYXQiOjE3MjIzNzUwMjQsImV4cCI6MTcyMjM3ODYyNCwiYXVkIjoibG9jYWwiLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vbG9jYWwiLCJzdWIiOiJmODgyZjg5OS1hODliLTRkNmUtYTdhYy05NWZjMjBlYmFjYjIifQ.
 ```
-
-　</details>
+</details>
 
 2. 事業者情報の取得
    
