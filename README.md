@@ -230,19 +230,6 @@ postgres                              14        480f26a07aa1   6 weeks ago      
 
 </details>
 
-```
-docker volume ls
-```
-<details closez>
-<summary>サンプル出力</summary>
-
-```
-DRIVER    VOLUME NAME
-local     user-authentication-system_db-vol
-```
-
-</details>
-
 
 ### docker実行
 
@@ -294,6 +281,19 @@ d709dac190f7   postgres:14                           "docker-entrypoint.s…"   
 1d481c4ead1e   user-authentication-system-firebase   "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   0.0.0.0:4000->4000/tcp, :::4000->4000/tcp, 0.0.0.0:9099->9099/tcp, :::9099->9099/tcp   user-authentication-system-firebase-1
 10334cce99b8   authenticator-backend                 "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp                                              authenticator-backend
 e903cb5701dc   data-spaces-backend                   "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                              data-spaces-backend
+```
+
+</details>
+
+```
+docker volume ls
+```
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+DRIVER    VOLUME NAME
+local     user-authentication-system_db-vol
 ```
 
 </details>
@@ -377,6 +377,16 @@ aoperatorid=`echo $result | jq -r .operatorId`
 echo "aoperatorid=$aoperatorid"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 ### 部品登録およびA社からB社へのCFP結果提出の依頼をする(基本フロー2 #4)
 
 1. 事業所の登録
@@ -410,6 +420,16 @@ aplantid=`echo $result | jq -r .plantId`
 echo "aplantid=$aplantid"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 2. 親部品情報の作成
 
     実行者：A社
@@ -437,6 +457,16 @@ echo $result | jq
 atraceid1=`echo $result | jq -r .traceId`
 echo "atraceid1=$atraceid1"
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
 
 3. 部品構成情報の登録
    
@@ -480,6 +510,16 @@ atraceid2=`echo $result | jq -r .childrenPartsModel[0].traceId`
 echo "atraceid2=$atraceid2"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 ### CFP結果提出の依頼
 
  公開されたB社情報(他社検索用)
@@ -503,6 +543,16 @@ echo $result | jq
 boperatorid=`echo $result | jq -r .operatorId`
 echo "boperatorid=$boperatorid"
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
 
 2. A社からB社への取引関係の作成
 
@@ -540,6 +590,16 @@ astatusid=`echo $result | jq -r .statusModel.statusId`
 echo "astatusid=$astatusid"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 
 ### B社からA社へ部品登録紐付けをする(基本フロー2 #31)
 
@@ -569,6 +629,16 @@ echo $result | jq
 btoken=`echo $result | jq -r .accessToken`
 echo "btoken=$btoken"
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
 
 CompanyB can use api to get his operatorid, but we already have it as boperatorid
 
@@ -602,6 +672,16 @@ bplantid=`echo $result | jq -r .plantId`
 echo "bplantid=$bplantid"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 3. 親部品情報の作成
    
     実行者：B社
@@ -627,8 +707,17 @@ result=`curl -s --location --request PUT "$url" \
 echo $result | jq
 btraceid=`echo $result | jq -r .traceId`
 echo "btraceid=$btraceid"
+```
+
+<details closez>
+<summary>サンプル出力</summary>
 
 ```
+
+```
+
+</details>
+
 
 4. 部品登録紐付けの依頼確認
    
@@ -645,6 +734,16 @@ btradeid=`echo $result | jq -r .[0].statusModel.tradeId`
 echo "btradeid=$btradeid"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 5. 部品登録紐付けの登録
   
    実行者：B社
@@ -657,6 +756,16 @@ result=`curl -s --location --request PUT "$url" \
 --header "Authorization: Bearer $btoken"`
 echo $result | jq
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
 
 ### B社からA社へCFP情報の伝達をする(基本フロー3 #5)
 
@@ -729,6 +838,16 @@ result=`curl -s --location --request PUT "$url" \
 echo $result | jq
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 
 ### B社の回答情報の取得およびA社の完成品のCFPを算出(基本フロー3 #6, #2)
 
@@ -747,6 +866,16 @@ atraceidb=`echo $result | jq -r .[0].downstreamTraceId`
 echo "atraceidb=$atraceidb"
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 2. 依頼情報のステータスを確認
   
      実行者：A社
@@ -759,6 +888,15 @@ result=`curl -s --location --request GET "$url" \
 --header "Authorization: Bearer $atoken"`
 echo $result | jq
 ```
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
 
 
 ### 完成品のCFP情報を算出する
@@ -831,6 +969,18 @@ result=`curl -s --location --request PUT "$url" \
 --data "$data"`
 echo $result | jq
 ```
+
+
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
+
+
 ### 完成品のCFP情報を算出する
 
 2. 登録したCFPの値を取得
@@ -846,7 +996,28 @@ result=`curl -s --location --request GET "$url" \
 echo $result | jq
 ```
 
+<details closez>
+<summary>サンプル出力</summary>
+
+```
+
+```
+
+</details>
 
 
+### Reset
+
+```
+docker compose down
+docker stop authenticator-backend
+docker stop data-spaces-backend
+docker rm authenticator-backend
+docker rm data-spaces-backend
+docker ps -a
+docker volume ls
+docker volume rm user-authentication-system_db-vol
+docker volume ls
+```
 
 
