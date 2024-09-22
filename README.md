@@ -219,6 +219,7 @@ docker images
 ```
 <details closez>
 <summary>サンプル出力</summary>
+
 ```
 REPOSITORY                            TAG       IMAGE ID       CREATED          SIZE
 user-authentication-system-firebase   latest    38ec8e7aa89d   9 minutes ago    292MB
@@ -226,6 +227,7 @@ authenticator-backend                 latest    144633d215fc   18 minutes ago   
 data-spaces-backend                   latest    2d38ec9936af   20 minutes ago   33.8MB
 postgres                              14        480f26a07aa1   6 weeks ago      422MB
 ```
+
 </details>
 
 ```
@@ -233,10 +235,12 @@ docker volume ls
 ```
 <details closez>
 <summary>サンプル出力</summary>
+
 ```
 DRIVER    VOLUME NAME
 local     user-authentication-system_db-vol
 ```
+
 </details>
 
 
@@ -283,6 +287,7 @@ docker run \
 
 <details closez>
 <summary>サンプル出力</summary>
+
 ```
 CONTAINER ID   IMAGE                                 COMMAND                  CREATED         STATUS         PORTS                                                                                  NAMES
 d709dac190f7   postgres:14                           "docker-entrypoint.s…"   5 minutes ago   Up 5 minutes   0.0.0.0:5432->5432/tcp, :::5432->5432/tcp                                              postgres
@@ -290,6 +295,7 @@ d709dac190f7   postgres:14                           "docker-entrypoint.s…"   
 10334cce99b8   authenticator-backend                 "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8081->8081/tcp, :::8081->8081/tcp                                              authenticator-backend
 e903cb5701dc   data-spaces-backend                   "/app/server"            6 minutes ago   Up 6 minutes   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp                                              data-spaces-backend
 ```
+
 </details>
 
 
