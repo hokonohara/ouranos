@@ -1130,7 +1130,7 @@ url="http://localhost:8080/api/v1/datatransport?dataTarget=cfp"
 data="[
     {
         \"cfpId\": null,
-        \"traceId\": \"$atraceid\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 3.0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"preProduction\",
@@ -1143,7 +1143,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId\": \"$atraceid\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 20.0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainProduction\",
@@ -1156,7 +1156,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId\": \"$atraceid\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"preComponent\",
@@ -1169,7 +1169,7 @@ data="[
     },
     {
         \"cfpId\": null,
-        \"traceId\": \"$atraceid\",
+        \"traceId\": \"$atraceidb\",
         \"ghgEmission\": 0,
         \"ghgDeclaredUnit\": \"kgCO2e/kilogram\",
         \"cfpType\": \"mainComponent\",
