@@ -1,4 +1,4 @@
-cd -/workspace/user-authentication-system
+cd ~/ouranos/user-authentication-system
 docker compose up -d
 sleep 5
 
