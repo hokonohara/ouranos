@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+#set -x
 
 aapikey=Sample-APIKey1
 aaccountid="oem_a@example.com"

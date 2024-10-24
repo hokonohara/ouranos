@@ -18,18 +18,18 @@ make idp-add-local
 read -n 1 -p "press any key to continue"
 
 docker run \
- -v ~/workspace/data-transaction-system/config/:/app/config/ \
+ -v ~/ouranos/data-transaction-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file ~/workspace/data-transaction-system/config/local.env \
+ --env-file ~/ouranos/data-transaction-system/config/local.env \
  -p 8080:8080 \
  --name data-spaces-backend data-spaces-backend
 
 read -n 1 -p "press any key to continue"
 
 docker run \
- -v ~/workspace/user-authentication-system/config/:/app/config/ \
+ -v ~/ouranos/user-authentication-system/config/:/app/config/ \
  -td -i --network docker.internal \
- --env-file ~/workspace/user-authentication-system/config/local.env \
+ --env-file ~/ouranos/user-authentication-system/config/local.env \
  -p 8081:8081 \
  --name authenticator-backend authenticator-backend
 
